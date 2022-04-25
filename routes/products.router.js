@@ -8,9 +8,11 @@ const {
   deleteProduct,
 } = require("../controllers/productController");
 
+const {verifyToken} = require('../middlewares/verifyToken')
+
 const productRouter = Router();
 
-productRouter.route("/").get(getAllProducts).post(createProduct);
+productRouter.route("/").get(verifyToken, getAllProducts).post(createProduct);
 
 productRouter
   .route("/:productId")
